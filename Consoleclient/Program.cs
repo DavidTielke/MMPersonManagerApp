@@ -7,6 +7,17 @@ using Ninject;
 
 namespace MM.PersonManagerApp.UI.Consoleclient
 {
+    public static class ParameterExtensions
+    {
+        public static void EnsureIsNotNullExt(this object source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException();
+            }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)

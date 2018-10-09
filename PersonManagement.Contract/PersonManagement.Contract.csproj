@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\AgeStatistic.cs" />
+    <Compile Include="Exceptions\CantCalculateAgeStatisticException.cs" />
+    <Compile Include="Exceptions\PersonManagementException.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Callbacks\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,7 @@ namespace Mappings
         {
             kernel.Bind<IPersonRepository>().To<PersonMemRepository>();
             kernel.Bind<IPersonManager>().To<PersonManager>();
+            kernel.Bind<IFileStorer>().To<FileStorer>();
         }
     }
 }

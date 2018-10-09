@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using DataStoring.Contract;
 using MM.PersonManagerApp.CrossCutting.DataClasses;
 using MM.PersonManagerApp.Logic.PersonManagement.Contract;
 using MM.PersonManagerApp.Logic.PersonManagement.Contract.DataClasses;
+using MM.PersonManagerApp.Logic.PersonManagement.Contract.Exceptions;
 
 namespace MM.PersonManagerApp.Logic.PersonManagement
 {
@@ -18,10 +20,20 @@ namespace MM.PersonManagerApp.Logic.PersonManagement
 
         public IQueryable<Person> GetAllAdults() => _repository.Query.Where(p => p.Age >= 18);
         public IQueryable<Person> GetAllChildren() => _repository.Query.Where(p => p.Age < 18);
-        public AgeStatistic GetAgeStatistic() => new AgeStatistic
+        public AgeStatistic GetAgeStatistic()
         {
-            AmountAdults = GetAllAdults().Count(),
-            AmountChildren = GetAllChildren().Count()
-        };
+            try
+            {
+                return new AgeStatistic
+                {
+                    AmountAdults = GetAllAdults().Count(),
+                    AmountChildren = GetAllChildren().Count()
+                };
+            }
+            catch (Exception e)
+            {
+                throw new CantCalculateAgeStatisticException("Keine Ahnung warum....", e);
+            }
+        }
     }
 }
